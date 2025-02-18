@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
     public Slider charHealth;
 
     public Slider enemyHealth;
-    public gameObject enemy;
+    public GameObject enemy;
 
     private bool fight = false;
 
@@ -56,11 +56,12 @@ public class Character : MonoBehaviour
     {
         enemyHealth.value -= attack;
 
-        Collider2D enemyCollider = enemy.GetComponentInParent<Collider2D>();
+        Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
 
-        Vector2 randomPosition = getEnemyCollider(enemycollider);
+        //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Collider2D-bounds.html
+        Vector2 randomPosition = new Vector2(Random.Range(enemyCollider.bounds.min.x, enemyCollider.bounds.max.x), Random.Range(enemyCollider.bounds.min.y, enemyCollider.bounds.max.y));
         GameObject hitsplatPrefab = Instantiate(hitsplat, randomPosition, Quaternion.identity);
-        Destroy(hitsplatPrefab, 0.2f);
+        Destroy(hitsplatPrefab, 0.3f);
     }
 
     public void Fight()
@@ -71,9 +72,4 @@ public class Character : MonoBehaviour
         defense = defenseSlider.value;
     }
 
-    private Vector2 getEnemyCollider(Collider2D enemyCollider)
-    {
-        Vector2 randomPosition = new Vector2(Random.Range(enemyCollider.bounds.min.x, enemyCollider.bounds.max.x), Random.Range(enemyCollider.bounds.min.y, enemyCollider.bounds.max.y));
-        return randomPosition;
-    }
 }
