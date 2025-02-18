@@ -6,13 +6,11 @@ using TMPro;
 
 public class Character : MonoBehaviour
 {
-    // Base values
-    private const int BASE_HEALTH = 100;
 
     // Stats
-    public int speed;
-    public int attack;
-    public int defense;
+    public float speed;
+    public float attack;
+    public float defense;
 
     public Slider speedSlider;
     public Slider attackSlider;
@@ -24,8 +22,8 @@ public class Character : MonoBehaviour
     // Start
     public void Start()
     {
-        maxHealth = BASE_HEALTH + (defense * 10);
         currentHealth = maxHealth;
+     
     }
 
     public void Update()
