@@ -7,6 +7,10 @@ using TMPro;
 public class Character : MonoBehaviour
 {
 
+    //Game Objects
+    public GameObject hitsplat;
+    public Transform hitsplatPos;
+
     // Stats
     public float speed;
     public float attack;
@@ -45,12 +49,13 @@ public class Character : MonoBehaviour
             }
         }
 
-
     }
 
     public void Attack()
     {
         enemyHealth.value -= attack;
+
+        Instantiate(hitsplat, hitsplatPos.position, Quaternion.identity);
     }
 
     public void Fight()
