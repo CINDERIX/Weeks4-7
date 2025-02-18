@@ -6,14 +6,13 @@ using TMPro;
 
 public class Character : MonoBehaviour
 {
-    public GameObject charHealthBar;
-    public GameObject enemyHealthBar;
 
     // Stats
     public float speed;
     public float attack;
     public float defense;
 
+    // timers
     private float timer = 0.0f;
     private float maxTime = 2.0f;
 
@@ -57,8 +56,6 @@ public class Character : MonoBehaviour
     public void Fight()
     {
         fight = true;
-//        charHealthBar.SetActive(true);
-  //      enemyHealthBar.SetActive(true);
         speed = speedSlider.value;
         attack = attackSlider.value;
         defense = defenseSlider.value;
