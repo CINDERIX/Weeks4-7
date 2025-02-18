@@ -9,7 +9,6 @@ public class Character : MonoBehaviour
 
     //Game Objects
     public GameObject hitsplat;
-    public Transform hitsplatPos;
 
     // Stats
     public float speed;
@@ -24,7 +23,9 @@ public class Character : MonoBehaviour
     public Slider attackSlider;
     public Slider defenseSlider;
     public Slider charHealth;
+
     public Slider enemyHealth;
+    public gameObject enemy;
 
     private bool fight = false;
 
@@ -55,7 +56,11 @@ public class Character : MonoBehaviour
     {
         enemyHealth.value -= attack;
 
-        Instantiate(hitsplat, hitsplatPos.position, Quaternion.identity);
+        Collider2D enemyCollider = enemy.GetComponentInParent<Collider2D>();
+
+        Vector2 randomPosition = getEnemyCollider(enemycollider);
+        GameObject hitsplatPrefab = Instantiate(hitsplat, randomPosition, Quaternion.identity);
+        Destroy(hitsplatPrefab, 0.2f);
     }
 
     public void Fight()
@@ -64,5 +69,11 @@ public class Character : MonoBehaviour
         speed = speedSlider.value;
         attack = attackSlider.value;
         defense = defenseSlider.value;
+    }
+
+    private Vector2 getEnemyCollider(Collider2D enemyCollider)
+    {
+        Vector2 randomPosition = new Vector2(Random.Range(enemyCollider.bounds.min.x, enemyCollider.bounds.max.x), Random.Range(enemyCollider.bounds.min.y, enemyCollider.bounds.max.y));
+        return randomPosition;
     }
 }
