@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Character : MonoBehaviour
 {
@@ -12,39 +14,25 @@ public class Character : MonoBehaviour
     public int attack;
     public int defense;
 
+    public Slider speedSlider;
+    public Slider attackSlider;
+    public Slider defenseSlider;
+
     private int maxHealth;
     private int currentHealth;
 
-    // Initialize
-    public void Initialize()
+    // Start
+    public void Start()
     {
         maxHealth = BASE_HEALTH + (defense * 10);
         currentHealth = maxHealth;
     }
 
-    // Attack
-    public void Attack(Character opponent)
+    public void Update()
     {
-        opponent.TakeDamage(attack);
+        speed = speedSlider.value;
+        attack = attackSlider.value;
+        defense = defenseSlider.value;
     }
 
-    // Take damage directly from attack stat
-    public void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        currentHealth = Mathf.Max(currentHealth, 0);
-        Debug.Log(gameObject.name + " took " + amount + " damage! Health: " + currentHealth);
-    }
-
-    // Check if character is still alive
-    public bool IsAlive()
-    {
-        return currentHealth > 0;
-    }
-
-    // Get current health
-    public int GetHealth()
-    {
-        return currentHealth;
-    }
 }
